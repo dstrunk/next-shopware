@@ -3,7 +3,6 @@ import { getShopwareApi } from '../config/shopware'
 export default function Products({ products }) {
   return (
     <>
-      hello!
       {!products.length && (
         <>
           No products found!
@@ -13,7 +12,7 @@ export default function Products({ products }) {
       {products.length && (
         <ul>
           {products.map(product => (
-            <li>
+            <li key={product.id}>
               <h2>{product.name}</h2>
               <p>
                 {product.description}
@@ -33,12 +32,12 @@ export async function getStaticProps(context) {
     const products = data.elements
 
     return {
-      props: { products: products },
+      props: { products },
     }
   } catch (error) {
     console.error(error)
     const products = []
 
-    return { props: { products } }
+    return { props: products }
   }
 }
