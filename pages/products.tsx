@@ -1,4 +1,5 @@
-import { getShopwareApi } from '../config/shopware'
+import Link from 'next/link'
+import { getShopwareApi, getSlugFromTitle } from '../config/shopware'
 
 export default function Products({ products }) {
   return (
@@ -10,16 +11,20 @@ export default function Products({ products }) {
       )}
 
       {products.length && (
-        <ul>
+        <div>
           {products.map(product => (
-            <li key={product.id}>
-              <h2>{product.name}</h2>
-              <p>
-                {product.description}
-              </p>
-            </li>
+            <>
+              <Link href={`/products/${getSlugFromTitle(product.name)}`} key={product.id}>
+                <a>
+                  <h2>{product.name}</h2>
+                  <p>
+                    {product.description}
+                  </p>
+                </a>
+              </Link>
+            </>
           ))}
-        </ul>
+        </div>
       )}
     </>
   )

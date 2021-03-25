@@ -1,3 +1,5 @@
+import slugify from 'slugify'
+
 export const getShopwareApi = (apiEndpoint, opts = {}) => {
   const options = {
     ...opts,
@@ -7,4 +9,8 @@ export const getShopwareApi = (apiEndpoint, opts = {}) => {
   }
 
   return fetch(`${process.env.SHOPWARE_API_ENDPOINT}/store-api/${apiEndpoint}`, options)
+}
+
+export const getSlugFromTitle = title => {
+  return slugify(title)
 }
